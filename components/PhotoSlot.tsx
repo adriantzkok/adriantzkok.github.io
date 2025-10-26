@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 
 interface PhotoSlotProps {
   src?: string;
@@ -24,7 +23,13 @@ export default function PhotoSlot({
       aria-hidden={!src}
     >
       {src ? (
-        <Image src={src} alt={alt} width={size} height={size} className="w-full h-full object-cover" />
+        <img
+          src={src}
+          alt={alt}
+          width={size}
+          height={size}
+          className="w-full h-full object-cover"
+        />
       ) : (
         <div className="flex items-center justify-center w-full h-full text-gray-500">
           🖼️
