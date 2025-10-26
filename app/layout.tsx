@@ -5,7 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 export const metadata: Metadata = {
   title: "Adrian K - Personal Portfolio",
   description:
-    "Personal portfolio and blog showcasing projects, articles, and professional experience",
+    "My personal portfolio showcasing my projects, and it's associated details and learnings",
 };
 
 export default function RootLayout({
