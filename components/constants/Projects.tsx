@@ -10,6 +10,7 @@ export interface Project {
   demoUrl?: string;
   githubUrl?: string;
   caseStudyUrl?: string;
+  blogUrl?: string;
   type: string;
 }
 
@@ -38,6 +39,7 @@ export const PROJECTS: Project[] = [
     ],
     image: "/xingjitravel.gif",
     demoUrl: "https://xingjitravel.com/",
+    blogUrl: "https://adrian-blog.vercel.app/en-US/posts/70",
   },
   {
     id: "2",
@@ -86,5 +88,6 @@ export const PROJECTS: Project[] = [
     image: "/blogpreview.gif",
     demoUrl: "https://adrian-blog.vercel.app/",
     githubUrl: "https://github.com/adriantzkok/MarkBlog",
+    blogUrl: "https://adrian-blog.vercel.app/en-US/posts/57",
   },
 ];

@@ -179,6 +179,19 @@ export function ProjectsPage() {
                         </a>
                       </Button>
                     )}
+                    {project.blogUrl && (
+                      <Button variant="outline" size="sm" asChild>
+                        <a
+                          href={project.blogUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2"
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                          Deep Dive
+                        </a>
+                      </Button>
+                    )}
                   </div>
                 </div>
               </div>
