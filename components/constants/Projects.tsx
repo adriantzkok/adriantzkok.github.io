@@ -62,6 +62,7 @@ export const PROJECTS: Project[] = [
       "Leveraged AI assisted tools to rapidly prototype and develop the website",
     ],
     image: "/ITC.gif",
+    demoUrl: "https://islandtrainingclub.vercel.app/",
   },
   {
     id: "3",
