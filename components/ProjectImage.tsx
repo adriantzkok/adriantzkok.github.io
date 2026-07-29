@@ -11,16 +11,12 @@ function ProjectImage({
   className?: string;
 }) {
   return (
-    <div className={cn("relative w-full h-full", className)}>
+    <div className={cn("relative h-full w-full", className)}>
       <Image
         src={src}
         alt={alt}
         fill
-        unoptimized
-        className="object-contain group-hover:scale-105 transition-transform duration-300"
-        onError={() => {
-          console.error("Image failed to load:", src);
-        }}
+        className="object-contain transition-transform duration-300 group-hover:scale-105"
       />
     </div>
   );

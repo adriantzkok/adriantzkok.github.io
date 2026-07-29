@@ -1,4 +1,5 @@
 import { Linkedin, Github } from "lucide-react";
+import { PageContainer } from "./PageContainer";
 
 export function Footer() {
   const socialLinks = [
@@ -11,37 +12,39 @@ export function Footer() {
   ];
 
   return (
-    <footer className="border-t py-12">
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+    <footer className="border-t border-border/70 py-12">
+      <PageContainer>
+        <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
           <div>
-            <h3 className="font-bold text-lg mb-2">Adrian K</h3>
-            <p className="text-muted-foreground max-w-md">
-              AI & Data Consultant diving deeper into the world of analytics,
-              machine learning, and cross cultural solutions.
+            <h3 className="mb-2 text-lg font-semibold text-foreground">
+              Adrian K
+            </h3>
+            <p className="max-w-md text-sm leading-7 text-muted-foreground">
+              AI & Data Consultant exploring analytics, machine learning, and
+              cross-cultural solutions with a calm, practical perspective.
             </p>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             {socialLinks.map((social) => (
               <a
                 key={social.label}
                 href={social.href}
-                className="w-8 h-8 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-border/70 bg-background/80 text-muted-foreground transition-colors hover:border-foreground/20 hover:text-foreground"
                 aria-label={social.label}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <social.icon className="w-4 h-4" />
+                <social.icon className="h-4 w-4" />
               </a>
             ))}
           </div>
         </div>
 
-        <div className="border-t mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
+        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-border/70 pt-8 text-sm text-muted-foreground md:flex-row">
           <p>© 2025 Adrian K. All rights reserved.</p>
         </div>
-      </div>
+      </PageContainer>
     </footer>
   );
 }

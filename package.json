@@ -13,6 +13,7 @@
     "@emotion/is-prop-valid": "latest",
     "@eslint/js": "latest",
     "@hookform/resolvers": "^3.10.0",
+    "@neondatabase/serverless": "^1.1.0",
     "@radix-ui/react-accordion": "1.2.3",
     "@radix-ui/react-alert-dialog": "1.1.6",
     "@radix-ui/react-aspect-ratio": "1.1.2",
@@ -48,14 +49,17 @@
     "clsx": "^2.1.1",
     "cmdk": "1.1.1",
     "date-fns": "^3.6.0",
+    "dotenv": "^17.4.2",
     "embla-carousel-react": "8.6.0",
     "eslint": "latest",
     "eslint-plugin-react-hooks": "latest",
     "eslint-plugin-react-refresh": "latest",
     "geist": "^1.3.1",
     "globals": "latest",
+    "gray-matter": "^4.0.3",
     "input-otp": "1.4.2",
     "jiti": "latest",
+    "katex": "^0.18.1",
     "less": "latest",
     "lightningcss": "latest",
     "lucide-react": "^0.454.0",
@@ -67,8 +71,12 @@
     "react-dom": "^18",
     "react-hook-form": "7.55.0",
     "react-icons": "^5.5.0",
+    "react-markdown": "^10.1.0",
     "react-resizable-panels": "2.1.7",
     "recharts": "2.15.2",
+    "rehype-katex": "^7.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-math": "^6.0.0",
     "sass": "latest",
     "sass-embedded": "latest",
     "sonner": "latest",
@@ -94,5 +102,21 @@
     "tw-animate-css": "1.3.3",
     "typescript": "^5",
     "typescript-eslint": "latest"
-  }
+  },
+  "description": "This is a personal portfolio website i've created to showcase my work across various projects.",
+  "main": "eslint.config.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adriantzkok/adriantzkok.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adriantzkok/adriantzkok.github.io/issues"
+  },
+  "homepage": "https://github.com/adriantzkok/adriantzkok.github.io#readme"
 }

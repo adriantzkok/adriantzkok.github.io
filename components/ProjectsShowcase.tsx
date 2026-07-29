@@ -1,42 +1,59 @@
-import { motion } from "motion/react";
+"use client";
+
+import { motion, useReducedMotion } from "motion/react";
 import { headerVariants } from "@/lib/motion-variants";
 import SectionWrapper from "./SectionWrapper";
+import { PageContainer } from "./PageContainer";
 import { PROJECTS } from "./constants/Projects";
 import Link from "next/link";
 
-const containerVariants = {
+const getContainerVariants = (reducedMotion: boolean) => ({
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.2 },
+    transition: {
+      staggerChildren: reducedMotion ? 0 : 0.12,
+      delayChildren: reducedMotion ? 0 : 0.12,
+    },
   },
-} as const;
+});
 
-const itemVariants = {
-  hidden: { y: 30, opacity: 0 },
-  visible: { y: 0, opacity: 1, transition: { duration: 0.6 } },
-} as const;
+const getItemVariants = (reducedMotion: boolean) => ({
+  hidden: { y: reducedMotion ? 0 : 24, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: reducedMotion
+      ? { duration: 0 }
+      : { duration: 0.55, ease: "easeOut" as const },
+  },
+});
 
 export default function ProjectsShowcase() {
+  const shouldReduceMotion = useReducedMotion() ?? false;
+  const containerVariants = getContainerVariants(shouldReduceMotion);
+  const itemVariants = getItemVariants(shouldReduceMotion);
+
   return (
-    <SectionWrapper className="bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950">
-      <div className="max-w-6xl mx-auto">
+    <SectionWrapper className="bg-transparent py-12 sm:py-16">
+      <PageContainer>
         <motion.div
           variants={headerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-8 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between"
         >
-          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400 bg-clip-text text-transparent mb-4">
-            Featured Projects
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full" />
-          <p className="p-5 mt-6 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            To develop and hone my technical and business skills outside of
-            work, i&apos;ve actively been developing and building projects on
-            the side. The following is a curated selection of projects i&apos;ve
-            been actively working on.
+          <div>
+            <p className="mb-2 text-[0.68rem] font-semibold uppercase tracking-[0.3em] text-muted-foreground">
+              Featured Projects
+            </p>
+            <h2 className="text-3xl font-semibold tracking-[-0.02em] text-foreground sm:text-4xl">
+              Selected recent work.
+            </h2>
+          </div>
+          <p className="max-w-xl text-base leading-7 text-muted-foreground sm:text-lg">
+            Side projects that I&apos;ve made from stratch.
           </p>
         </motion.div>
 
@@ -45,63 +62,59 @@ export default function ProjectsShowcase() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 p-9 place-items-center"
+          className="grid gap-5 md:grid-cols-2"
         >
           {PROJECTS.map((project, index) => (
-            <Link href={`/projects/#${project.id}`} key={index}>
-              <motion.div
-                key={index}
+            <Link href={`/projects/#${project.id}`} key={project.id || index}>
+              <motion.article
                 variants={itemVariants}
-                whileHover={{ y: -10 }}
-                className="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 max-w-2xl"
+                whileHover={
+                  shouldReduceMotion ? undefined : { y: -3, scale: 1.005 }
+                }
+                whileTap={shouldReduceMotion ? undefined : { scale: 0.995 }}
+                className="group flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-border/70 bg-card/70 transition-all duration-200 hover:border-foreground/15"
               >
-                {/* Project Image */}
-                <div className="relative h-48 overflow-hidden bg-gradient-to-br from-blue-500 to-purple-600">
+                <div className="relative h-44 overflow-hidden bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-700">
                   <motion.img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.3 }}
+                    className="h-full w-full object-cover opacity-90 transition duration-300 group-hover:opacity-100"
+                    whileHover={
+                      shouldReduceMotion ? undefined : { scale: 1.02 }
+                    }
+                    transition={{ duration: 0.2 }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/10 to-transparent" />
+                  <span className="absolute bottom-3 left-3 inline-flex rounded-full border border-white/20 bg-background/70 px-2.5 py-1 text-[0.62rem] font-medium uppercase tracking-[0.24em] text-foreground/90 backdrop-blur">
+                    {project.type}
+                  </span>
                 </div>
 
-                {/* Project Content */}
-                <div className="p-6">
-                  <div className="flex items-start justify-between mb-3">
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                      {project.title}
-                    </h3>
+                <div className="flex flex-1 flex-col p-5 sm:p-6">
+                  <h3 className="mb-2 text-lg font-semibold tracking-[-0.01em] text-foreground transition-colors group-hover:text-muted-foreground">
+                    {project.title}
+                  </h3>
 
-                    <div className="ml-4 flex-shrink-0">
-                      <span className="text-xs font-medium px-2 py-1 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200">
-                        {project.type}
-                      </span>
-                    </div>
-                  </div>
-
-                  <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+                  <p className="mb-4 flex-1 text-sm leading-7 text-muted-foreground">
                     {project.description}
                   </p>
 
-                  {/* Tech chips */}
-                  <div className="flex flex-wrap gap-2 mb-4 pt-4">
+                  <div className="flex flex-wrap gap-2">
                     {project.technologies?.map((tech) => (
                       <span
                         key={tech}
-                        className="text-xs px-2 py-1 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200"
+                        className="rounded-full border border-border/70 bg-background/70 px-2.5 py-1 text-[0.7rem] font-medium text-muted-foreground"
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
                 </div>
-              </motion.div>
+              </motion.article>
             </Link>
           ))}
         </motion.div>
-      </div>
+      </PageContainer>
     </SectionWrapper>
   );
 }

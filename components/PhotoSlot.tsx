@@ -1,9 +1,9 @@
-import React from "react";
+import Image from "next/image";
 
 interface PhotoSlotProps {
-  src?: string;
+  src: string;
   alt?: string;
-  size?: number; // px
+  size?: number;
   className?: string;
 }
 
@@ -16,25 +16,18 @@ export default function PhotoSlot({
   return (
     <div
       className={
-        "inline-flex items-center justify-center rounded-full overflow-hidden bg-gray-100 " +
+        "inline-flex items-center justify-center overflow-hidden rounded-full bg-muted " +
         className
       }
       style={{ width: size, height: size }}
-      aria-hidden={!src}
     >
-      {src ? (
-        <img
-          src={src}
-          alt={alt}
-          width={size}
-          height={size}
-          className="w-full h-full object-cover"
-        />
-      ) : (
-        <div className="flex items-center justify-center w-full h-full text-gray-500">
-          🖼️
-        </div>
-      )}
+      <Image
+        src={src}
+        alt={alt}
+        width={size}
+        height={size}
+        className="h-full w-full object-cover"
+      />
     </div>
   );
 }

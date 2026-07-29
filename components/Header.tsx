@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { PageContainer } from "./PageContainer";
 import { Button } from "./ui/button";
 import {
   Sheet,
@@ -11,6 +12,13 @@ import {
   SheetTitle,
 } from "./ui/sheet";
 import { Menu } from "lucide-react";
+
+const navItems = [
+  { href: "/", label: "Home" },
+  { href: "/blog", label: "Blog" },
+  { href: "/projects", label: "Projects" },
+  { href: "/about", label: "About" },
+];
 
 export function Header() {
   const pathname = usePathname();
@@ -23,52 +31,31 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-sm border-b">
-      <div className="container mx-auto px-6 h-16 flex items-center justify-between">
-        {/* Logo */}
+    <header className="sticky top-0 z-50 w-full border-b border-border/70 bg-background/80 backdrop-blur-xl">
+      <PageContainer className="flex h-16 items-center justify-between">
         <Link
           href="/"
-          className="text-xl font-bold text-foreground hover:text-muted-foreground transition-colors"
+          className="flex items-center gap-3 text-[0.95rem] font-semibold tracking-[0.24em] text-foreground uppercase transition-colors hover:text-muted-foreground"
         >
           Adrian K
         </Link>
 
-        {/* Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
-          <Link
-            href="/"
-            className={`text-sm transition-colors ${
-              isActive("/")
-                ? "text-foreground font-medium"
-                : "text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            Home
-          </Link>
-          {/* Articles removed - this site showcases projects only */}
-          <Link
-            href="/projects"
-            className={`text-sm transition-colors ${
-              isActive("/projects")
-                ? "text-foreground font-medium"
-                : "text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            Projects
-          </Link>
-          <Link
-            href="/about"
-            className={`text-sm transition-colors ${
-              isActive("/about")
-                ? "text-foreground font-medium"
-                : "text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            About
-          </Link>
+        <nav className="hidden items-center gap-6 md:flex">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`text-sm transition-colors ${
+                isActive(item.href)
+                  ? "text-foreground font-medium"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
 
-        {/* Mobile menu */}
         <div className="md:hidden">
           <Sheet>
             <SheetTrigger asChild>
@@ -77,7 +64,7 @@ export function Header() {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="p-0">
-              <div className="p-4 border-b">
+              <div className="border-b p-4">
                 <SheetTitle asChild>
                   <Link href="/" className="text-lg font-semibold">
                     Adrian K
@@ -86,54 +73,28 @@ export function Header() {
               </div>
               <nav className="p-2">
                 <ul className="flex flex-col">
-                  <li>
-                    <SheetClose asChild>
-                      <Link
-                        href="/"
-                        className={`block px-4 py-3 ${
-                          isActive("/")
-                            ? "text-foreground font-medium"
-                            : "text-muted-foreground hover:text-foreground"
-                        }`}
-                      >
-                        Home
-                      </Link>
-                    </SheetClose>
-                  </li>
-                  <li>
-                    <SheetClose asChild>
-                      <Link
-                        href="/projects"
-                        className={`block px-4 py-3 ${
-                          isActive("/projects")
-                            ? "text-foreground font-medium"
-                            : "text-muted-foreground hover:text-foreground"
-                        }`}
-                      >
-                        Projects
-                      </Link>
-                    </SheetClose>
-                  </li>
-                  <li>
-                    <SheetClose asChild>
-                      <Link
-                        href="/about"
-                        className={`block px-4 py-3 ${
-                          isActive("/about")
-                            ? "text-foreground font-medium"
-                            : "text-muted-foreground hover:text-foreground"
-                        }`}
-                      >
-                        About
-                      </Link>
-                    </SheetClose>
-                  </li>
+                  {navItems.map((item) => (
+                    <li key={item.href}>
+                      <SheetClose asChild>
+                        <Link
+                          href={item.href}
+                          className={`block px-4 py-3 ${
+                            isActive(item.href)
+                              ? "text-foreground font-medium"
+                              : "text-muted-foreground hover:text-foreground"
+                          }`}
+                        >
+                          {item.label}
+                        </Link>
+                      </SheetClose>
+                    </li>
+                  ))}
                 </ul>
               </nav>
             </SheetContent>
           </Sheet>
         </div>
-      </div>
+      </PageContainer>
     </header>
   );
 }
