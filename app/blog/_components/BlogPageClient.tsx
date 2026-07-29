@@ -1,12 +1,16 @@
 "use client";
 
 import Link from "next/link";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
-import { PageContainer } from "@/components/PageContainer";
-import type { BlogPost } from "@/lib/blog";
+import { PageContainer } from "@/components/shared/PageContainer";
+import type { BlogPostSummary } from "@/lib/blog";
 
 type BlogPageClientProps = {
-  posts: BlogPost[];
+  posts: BlogPostSummary[];
+  page: number;
+  totalPosts: number;
+  totalPages: number;
 };
 
 const getContainerVariants = (reducedMotion: boolean) => ({
@@ -31,7 +35,16 @@ const getCardVariants = (reducedMotion: boolean) => ({
   },
 });
 
-export default function BlogPageClient({ posts }: BlogPageClientProps) {
+function getPageHref(page: number) {
+  return page === 1 ? "/blog" : `/blog?page=${page}`;
+}
+
+export default function BlogPageClient({
+  posts,
+  page,
+  totalPosts,
+  totalPages,
+}: BlogPageClientProps) {
   const shouldReduceMotion = useReducedMotion() ?? false;
   const containerVariants = getContainerVariants(shouldReduceMotion);
   const cardVariants = getCardVariants(shouldReduceMotion);
@@ -108,6 +121,45 @@ export default function BlogPageClient({ posts }: BlogPageClientProps) {
             </motion.div>
           ))}
         </motion.div>
+
+        {totalPages > 1 ? (
+          <nav
+            aria-label="Blog pagination"
+            className="flex items-center justify-between gap-4 border-t border-border pt-6"
+          >
+            {page > 1 ? (
+              <Link
+                href={getPageHref(page - 1)}
+                rel="prev"
+                className="inline-flex h-10 items-center gap-2 rounded-md border border-border bg-card px-3 text-sm font-medium text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <ChevronLeft className="size-4" aria-hidden="true" />
+                Previous
+              </Link>
+            ) : (
+              <span aria-hidden="true" className="h-10 w-24" />
+            )}
+
+            <p className="text-center text-sm text-muted-foreground">
+              Page <span className="font-medium text-foreground">{page}</span>{" "}
+              of {totalPages}
+              <span className="sr-only">, {totalPosts} posts total</span>
+            </p>
+
+            {page < totalPages ? (
+              <Link
+                href={getPageHref(page + 1)}
+                rel="next"
+                className="inline-flex h-10 items-center gap-2 rounded-md border border-border bg-card px-3 text-sm font-medium text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                Next
+                <ChevronRight className="size-4" aria-hidden="true" />
+              </Link>
+            ) : (
+              <span aria-hidden="true" className="h-10 w-24" />
+            )}
+          </nav>
+        ) : null}
       </PageContainer>
     </main>
   );

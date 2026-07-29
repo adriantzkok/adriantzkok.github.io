@@ -1,16 +1,17 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import type { BlogPost } from "@/lib/blog";
-import { Footer } from "./Footer";
-import { Header } from "./Header";
+import type { BlogPostSummary } from "@/lib/blog";
+import { Footer } from "@/components/layout/Footer";
+import { Header } from "@/components/layout/Header";
 import BlogShowcase from "./BlogShowcase";
 import ProjectsShowcase from "./ProjectsShowcase";
-import { Hero } from "./hero/Hero";
-import TraitShowcase from "./hero/TraitShowcase";
+import { Hero } from "./Hero";
+import { SectionNavigator } from "./SectionNavigator";
+import TraitShowcase from "./TraitShowcase";
 
 type HomePageClientProps = {
-  posts: BlogPost[];
+  posts: BlogPostSummary[];
 };
 
 export default function HomePageClient({ posts }: HomePageClientProps) {
@@ -28,6 +29,7 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
       }
     >
       <Header />
+      <SectionNavigator />
       <Hero />
       <TraitShowcase />
       <ProjectsShowcase />

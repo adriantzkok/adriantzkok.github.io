@@ -1,8 +1,10 @@
+"use client";
+
 import { ArrowUpRight, Github, Calendar, TrendingUp } from "lucide-react";
-import { Project, PROJECTS } from "@/constants/Projects"; // Import the interface
+import { PROJECTS, type Project } from "@/data/projects";
 import { cn } from "@/lib/utils";
-import { PageContainer } from "../../components/PageContainer";
-import ProjectImage from "../../components/ProjectImage";
+import { PageContainer } from "@/components/shared/PageContainer";
+import ProjectImage from "./ProjectImage";
 
 import { motion } from "motion/react";
 import { headerVariants } from "@/lib/motion-variants";
@@ -26,7 +28,7 @@ export function ProjectsPage() {
       <PageContainer>
         {/* Header */}
         <motion.div
-          className="max-w-4xl py-16 sm:py-20 lg:py-24"
+          className="py-16 sm:py-20 lg:py-24"
           variants={headerVariants}
           initial="hidden"
           animate="visible"
@@ -37,7 +39,7 @@ export function ProjectsPage() {
           <h1 className="mt-6 text-5xl font-semibold leading-[0.95] tracking-[-0.045em] sm:text-6xl lg:text-7xl">
             Projects
           </h1>
-          <p className="mt-8 max-w-3xl text-lg leading-8 text-muted-foreground sm:text-xl sm:leading-9">
+          <p className="mt-8 text-lg leading-8 text-muted-foreground sm:text-xl sm:leading-9">
             As a AI & Data Consultant, I encounter a diverse range of projects
             that demand various skills. To enhance my expertise and ensure my
             abilities (technical & non technical) meet the required standard, I
@@ -107,7 +109,7 @@ export function ProjectsPage() {
                       {project.title}
                     </h2>
 
-                    <p className="max-w-3xl text-base leading-8 text-muted-foreground sm:text-lg">
+                    <p className="text-base leading-8 text-muted-foreground sm:text-lg">
                       {project.longDescription}
                     </p>
                   </div>

@@ -1,5 +1,5 @@
 import { Linkedin, Github } from "lucide-react";
-import { PageContainer } from "./PageContainer";
+import { PageContainer } from "@/components/shared/PageContainer";
 
 export function Footer() {
   const socialLinks = [

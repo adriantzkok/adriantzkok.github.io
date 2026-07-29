@@ -1,8 +1,8 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import SectionWrapper from "../SectionWrapper";
-import { PageContainer } from "../PageContainer";
+import SectionWrapper from "./SectionWrapper";
+import { PageContainer } from "@/components/shared/PageContainer";
 
 const getCardVariants = (reducedMotion: boolean) => ({
   hidden: { opacity: 0, y: reducedMotion ? 0 : -12 },
@@ -20,7 +20,7 @@ export default function TraitShowcase() {
   const cardVariants = getCardVariants(shouldReduceMotion);
 
   return (
-    <SectionWrapper className="bg-transparent pt-10 pb-8 sm:pt-14 sm:pb-8">
+    <SectionWrapper id="about" className="bg-transparent pt-10 pb-8 sm:pt-14 sm:pb-8">
       <PageContainer>
         <motion.div
           variants={cardVariants}

@@ -2,15 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { PageContainer } from "./PageContainer";
-import { Button } from "./ui/button";
+import { PageContainer } from "@/components/shared/PageContainer";
+import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
   SheetTrigger,
   SheetClose,
   SheetTitle,
-} from "./ui/sheet";
+} from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 
 const navItems = [

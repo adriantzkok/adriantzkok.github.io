@@ -3,8 +3,8 @@
 import { motion, useReducedMotion } from "motion/react";
 import { headerVariants } from "@/lib/motion-variants";
 import SectionWrapper from "./SectionWrapper";
-import { PageContainer } from "./PageContainer";
-import { PROJECTS } from "./constants/Projects";
+import { PageContainer } from "@/components/shared/PageContainer";
+import { PROJECTS } from "@/data/projects";
 import Link from "next/link";
 
 const getContainerVariants = (reducedMotion: boolean) => ({
@@ -35,7 +35,7 @@ export default function ProjectsShowcase() {
   const itemVariants = getItemVariants(shouldReduceMotion);
 
   return (
-    <SectionWrapper className="bg-transparent py-12 sm:py-16">
+    <SectionWrapper id="projects" className="bg-transparent py-12 sm:py-16">
       <PageContainer>
         <motion.div
           variants={headerVariants}

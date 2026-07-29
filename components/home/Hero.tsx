@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import SectionWrapper from "../SectionWrapper";
-import { PageContainer } from "../PageContainer";
+import SectionWrapper from "./SectionWrapper";
+import { PageContainer } from "@/components/shared/PageContainer";
 import { motion, useReducedMotion } from "motion/react";
 
 const getContainerVariants = (reducedMotion: boolean) => ({
@@ -47,7 +47,7 @@ export function Hero() {
   const buttonVariants = getButtonVariants(shouldReduceMotion);
 
   return (
-    <SectionWrapper className="relative pt-8 sm:pt-12 lg:pt-16">
+    <SectionWrapper id="hero" className="relative pt-8 sm:pt-12 lg:pt-16">
       <motion.div
         className="pointer-events-none absolute -right-24 top-0 hidden h-72 w-72 rounded-full border border-border/30 bg-card/40 blur-3xl sm:block"
         initial={

@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getAllPosts, getPostBySlug } from "@/lib/blog";
-import { MarkdownRenderer } from "@/components/blog/MarkdownRenderer";
-import { PageContainer } from "@/components/PageContainer";
+import { getMorePosts, getPostBySlug, getPublishedPostSlugs } from "@/lib/blog";
+import { MarkdownRenderer } from "../_components/MarkdownRenderer";
+import { PageContainer } from "@/components/shared/PageContainer";
 
 function extractByline(content: string) {
   const byline = content.match(/^\s*By\s+([^\r\n]+)\s*(?:\r?\n)+/i);
@@ -22,9 +22,9 @@ export const dynamicParams = false;
 export const revalidate = 60;
 
 export async function generateStaticParams() {
-  const posts = await getAllPosts();
+  const slugs = await getPublishedPostSlugs();
 
-  return posts.map((post) => ({ slug: post.slug }));
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -51,7 +51,10 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const [post, posts] = await Promise.all([getPostBySlug(slug), getAllPosts()]);
+  const [post, posts] = await Promise.all([
+    getPostBySlug(slug),
+    getMorePosts(slug),
+  ]);
 
   if (!post) {
     notFound();
@@ -107,45 +110,27 @@ export default async function BlogPostPage({
             </p>
             <nav className="mt-5">
               <ul className="space-y-1">
-                {posts.map((listedPost) => {
-                  const isCurrent = listedPost.slug === post.slug;
-
-                  return (
-                    <li key={listedPost.slug}>
-                      {isCurrent ? (
-                        <div
-                          aria-current="page"
-                          className="border-l-2 border-foreground py-2 pl-3"
-                        >
-                          <span className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                            Current
-                          </span>
-                          <p className="mt-1 text-sm font-medium leading-5 text-foreground">
-                            {listedPost.title}
-                          </p>
-                        </div>
-                      ) : (
-                        <Link
-                          href={`/blog/${listedPost.slug}`}
-                          className="group block border-l border-border py-2 pl-3 transition-colors hover:border-foreground"
-                        >
-                          <time
-                            dateTime={listedPost.date}
-                            className="text-xs text-muted-foreground"
-                          >
-                            {new Date(listedPost.date).toLocaleDateString(
-                              "en-US",
-                              { month: "short", day: "numeric" },
-                            )}
-                          </time>
-                          <p className="mt-1 text-sm leading-5 text-foreground/75 transition-colors group-hover:text-foreground">
-                            {listedPost.title}
-                          </p>
-                        </Link>
-                      )}
-                    </li>
-                  );
-                })}
+                {posts.map((listedPost) => (
+                  <li key={listedPost.slug}>
+                    <Link
+                      href={`/blog/${listedPost.slug}`}
+                      className="group block border-l border-border py-2 pl-3 transition-colors hover:border-foreground"
+                    >
+                      <time
+                        dateTime={listedPost.date}
+                        className="text-xs text-muted-foreground"
+                      >
+                        {new Date(listedPost.date).toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                        })}
+                      </time>
+                      <p className="mt-1 text-sm leading-5 text-foreground/75 transition-colors group-hover:text-foreground">
+                        {listedPost.title}
+                      </p>
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </nav>
             <Link

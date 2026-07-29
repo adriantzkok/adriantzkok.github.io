@@ -5,13 +5,13 @@ import Link from "next/link";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
-import type { BlogPost } from "@/lib/blog";
+import type { BlogPostSummary } from "@/lib/blog";
 import { headerVariants } from "@/lib/motion-variants";
-import { PageContainer } from "./PageContainer";
+import { PageContainer } from "@/components/shared/PageContainer";
 import SectionWrapper from "./SectionWrapper";
 
 type BlogShowcaseProps = {
-  posts: BlogPost[];
+  posts: BlogPostSummary[];
 };
 
 const getContainerVariants = (reducedMotion: boolean) => ({
@@ -71,7 +71,7 @@ export default function BlogShowcase({ posts }: BlogShowcaseProps) {
   }
 
   return (
-    <SectionWrapper className="bg-transparent py-12 sm:py-16">
+    <SectionWrapper id="writing" className="bg-transparent py-12 sm:py-16">
       <PageContainer>
         <motion.div
           variants={headerVariants}
