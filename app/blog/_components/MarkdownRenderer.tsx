@@ -20,7 +20,7 @@ export function MarkdownRenderer({
   return (
     <div
       className={cn(
-        "prose prose-neutral max-w-none dark:prose-invert",
+        "markdown-content prose prose-neutral max-w-none dark:prose-invert",
         className,
       )}
     >
@@ -31,7 +31,7 @@ export function MarkdownRenderer({
           a: ({ ...props }) => (
             <Link
               href={String(props.href ?? "#")}
-              className="text-primary underline underline-offset-4"
+              className="break-words text-primary underline underline-offset-4 [overflow-wrap:anywhere]"
               {...props}
             />
           ),
@@ -39,7 +39,7 @@ export function MarkdownRenderer({
             const isInline = !className;
             return isInline ? (
               <code
-                className="rounded bg-muted px-1.5 py-0.5 text-sm"
+                className="break-words rounded bg-muted px-1.5 py-0.5 text-sm [overflow-wrap:anywhere]"
                 {...props}
               >
                 {children}
@@ -82,11 +82,21 @@ export function MarkdownRenderer({
             <ol className="my-4 list-decimal space-y-2 pl-6">{children}</ol>
           ),
           table: ({ children }) => (
-            <div className="my-6 overflow-x-auto">
-              <table className="min-w-full border-collapse text-sm">
+            <div className="markdown-table my-6 overflow-x-auto rounded-md border border-border">
+              <table className="m-0 min-w-full border-collapse text-sm">
                 {children}
               </table>
             </div>
+          ),
+          th: ({ children }) => (
+            <th className="border-b border-r border-border bg-muted/70 px-4 py-3 text-left font-semibold last:border-r-0">
+              {children}
+            </th>
+          ),
+          td: ({ children }) => (
+            <td className="border-b border-r border-border px-4 py-3 align-top last:border-r-0">
+              {children}
+            </td>
           ),
         }}
       >

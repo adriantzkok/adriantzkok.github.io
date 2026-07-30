@@ -29,6 +29,7 @@ export const PROJECTS: Project[] = [
       "Supabase",
       "Next.js",
       "Google Search Console",
+      "Google Analytics",
     ],
     timeline: "2 months",
     impact: [
@@ -49,13 +50,7 @@ export const PROJECTS: Project[] = [
       "Project focused on leveraging AI assisted tools to focus more on stakeholder experience and project management.",
     longDescription:
       "With the advance of AI assisted tools, I wanted to explore how these new technologies influenced development and how it enables developers to ship at speed. As a result, I decided to take on the initative and create a website for my local fitness club. Letting the tools do the heavy lifting, I was able to focus on the stakeholder experience and project management side of things, ensuring that the end product met the needs of the stakeholders. I was also able to understand deeply the capabilities and limitations of these new AI assisted tools, which was a valuable learning experience.",
-    technologies: [
-      "Figma Make",
-      "Vercel V0",
-      "Copilot",
-      "Google Analytics",
-      "AMP",
-    ],
+    technologies: ["Figma Make", "Vercel V0", "Copilot", "AMP"],
     timeline: "1 month",
     impact: [
       "Worked with stakeholders to understand business requirements and the vision and goal for the website",

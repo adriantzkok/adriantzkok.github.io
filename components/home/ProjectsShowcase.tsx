@@ -52,9 +52,6 @@ export default function ProjectsShowcase() {
               Selected recent work.
             </h2>
           </div>
-          <p className="max-w-xl text-base leading-7 text-muted-foreground sm:text-lg">
-            Side projects that I&apos;ve made from stratch.
-          </p>
         </motion.div>
 
         <motion.div

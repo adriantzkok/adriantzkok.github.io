@@ -11,12 +11,16 @@ function ProjectImage({
   className?: string;
 }) {
   return (
-    <div className={cn("relative h-full w-full", className)}>
+    <div className="relative h-full w-full">
       <Image
         src={src}
         alt={alt}
         fill
-        className="object-contain transition-transform duration-300 group-hover:scale-105"
+        sizes="(min-width: 1024px) 33vw, 100vw"
+        className={cn(
+          "object-contain transition-transform duration-300 group-hover:scale-105",
+          className,
+        )}
       />
     </div>
   );

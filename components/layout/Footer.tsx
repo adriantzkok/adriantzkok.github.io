@@ -20,8 +20,7 @@ export function Footer() {
               Adrian K
             </h3>
             <p className="max-w-md text-sm leading-7 text-muted-foreground">
-              AI & Data Consultant exploring analytics, machine learning, and
-              cross-cultural solutions with a calm, practical perspective.
+              Making complex concepts simple, intuitively.
             </p>
           </div>
 

@@ -166,7 +166,7 @@ export function Hero() {
 
           <motion.div
             variants={textVariants}
-            className="overflow-hidden rounded-[2rem] border border-border/60 bg-background/90 p-6 shadow-sm"
+            className="overflow-hidden rounded-2xl border border-border/60 bg-background/90 p-3 shadow-sm sm:rounded-[2rem] sm:p-6"
             whileHover={
               shouldReduceMotion
                 ? undefined
@@ -177,21 +177,21 @@ export function Hero() {
                   }
             }
           >
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid grid-cols-2 gap-2 sm:gap-4">
               {[1, 2, 3, 4].map((photo) => (
                 <motion.div
                   key={photo}
                   whileHover={
                     shouldReduceMotion ? undefined : { y: -2, scale: 1.01 }
                   }
-                  className="overflow-hidden rounded-[1.75rem] border border-border/60 bg-zinc-950"
+                  className="overflow-hidden rounded-xl border border-border/60 bg-zinc-950 sm:rounded-[1.75rem]"
                 >
                   <Image
                     src={`/${photo}.webp`}
                     alt={`Gallery photo ${photo}`}
                     width={600}
                     height={700}
-                    className="h-56 w-full object-cover sm:h-80"
+                    className="aspect-[4/5] h-auto w-full object-cover sm:h-80 sm:aspect-auto"
                   />
                 </motion.div>
               ))}

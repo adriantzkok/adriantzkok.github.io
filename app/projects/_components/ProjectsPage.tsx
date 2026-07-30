@@ -40,14 +40,14 @@ export function ProjectsPage() {
             Projects
           </h1>
           <p className="mt-8 text-lg leading-8 text-muted-foreground sm:text-xl sm:leading-9">
-            As a AI & Data Consultant, I encounter a diverse range of projects
-            that demand various skills. To enhance my expertise and ensure my
-            abilities (technical & non technical) meet the required standard, I
-            undertake personal projects to hone and increase my understanding of
-            the skills required. Below is a curated selection of my many
-            projects, each highlighting distinct facets of my acquired technical
-            and soft skills, from software development to stakeholder
-            engagement.
+            During my time as an AI & Data Consultant, I encountered a diverse
+            range of projects that demanded various skills. To enhance my
+            expertise and ensure my abilities (technical & non technical) meet
+            the required standard, I undertook personal projects to hone and
+            increase my understanding of the skills required. Below is a curated
+            selection of my many projects, each highlighting distinct facets of
+            my acquired technical and soft skills, which I learned from the
+            ground up.
           </p>
         </motion.div>
 
@@ -61,7 +61,7 @@ export function ProjectsPage() {
           {PROJECTS.map((project: Project, index: number) => (
             <motion.article
               key={project.id}
-              className="group border-b border-border py-12 sm:py-16 lg:py-20"
+              className="group border-b border-border py-4 sm:py-6 lg:py-5"
               variants={itemVariants}
             >
               <div

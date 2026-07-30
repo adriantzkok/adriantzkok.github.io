@@ -31,9 +31,9 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
       <Header />
       <SectionNavigator />
       <Hero />
+      <BlogShowcase posts={posts} />
       <TraitShowcase />
       <ProjectsShowcase />
-      <BlogShowcase posts={posts} />
       <Footer />
     </motion.div>
   );

@@ -133,7 +133,7 @@ export default function BlogShowcase({ posts }: BlogShowcaseProps) {
                     href={`/blog/${post.slug}`}
                     className="flex h-full flex-col rounded-[1.5rem] border border-border/70 bg-card/70 p-5 transition-colors duration-200 hover:border-foreground/15 sm:p-6"
                   >
-                    <div className="flex items-center justify-between gap-3 text-xs text-muted-foreground">
+                    <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground">
                       <time dateTime={post.date} className="font-medium">
                         {new Date(post.date).toLocaleDateString("en-US", {
                           month: "short",
@@ -142,7 +142,7 @@ export default function BlogShowcase({ posts }: BlogShowcaseProps) {
                         })}
                       </time>
                       {post.tags[0] ? (
-                        <span className="rounded-full border border-border/70 bg-background/70 px-2.5 py-1 font-medium">
+                        <span className="max-w-full break-words rounded-full border border-border/70 bg-background/70 px-2.5 py-1 font-medium">
                           {post.tags[0]}
                         </span>
                       ) : null}

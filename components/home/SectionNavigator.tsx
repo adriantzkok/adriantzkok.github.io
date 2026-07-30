@@ -23,7 +23,10 @@ export function SectionNavigator() {
       (entries) => {
         const visibleEntry = entries
           .filter((entry) => entry.isIntersecting)
-          .sort((first, second) => second.intersectionRatio - first.intersectionRatio)[0];
+          .sort(
+            (first, second) =>
+              second.intersectionRatio - first.intersectionRatio,
+          )[0];
 
         if (visibleEntry) {
           setActiveSection(visibleEntry.target.id);
@@ -42,7 +45,9 @@ export function SectionNavigator() {
       className="fixed right-4 top-1/2 z-40 hidden -translate-y-1/2 lg:block xl:right-7"
       initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, x: 16 }}
       animate={{ opacity: 1, x: 0 }}
-      transition={shouldReduceMotion ? { duration: 0 } : { delay: 0.45, duration: 0.4 }}
+      transition={
+        shouldReduceMotion ? { duration: 0 } : { delay: 0.45, duration: 0.4 }
+      }
     >
       <ol className="relative flex flex-col gap-1 rounded-lg border border-border/70 bg-background/80 p-1.5 shadow-lg shadow-black/5 backdrop-blur-xl">
         <span

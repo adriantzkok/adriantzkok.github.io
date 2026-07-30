@@ -20,7 +20,10 @@ export default function TraitShowcase() {
   const cardVariants = getCardVariants(shouldReduceMotion);
 
   return (
-    <SectionWrapper id="about" className="bg-transparent pt-10 pb-8 sm:pt-14 sm:pb-8">
+    <SectionWrapper
+      id="about"
+      className="bg-transparent pt-10 pb-8 sm:pt-14 sm:pb-8"
+    >
       <PageContainer>
         <motion.div
           variants={cardVariants}
@@ -28,7 +31,7 @@ export default function TraitShowcase() {
           whileInView="visible"
           viewport={{ once: true }}
           whileHover={shouldReduceMotion ? undefined : { y: -3, scale: 1.005 }}
-          className="rounded-[2rem] border bg-card/70 b-3 border-black p-10"
+          className="rounded-2xl border bg-card/70 b-3 border-black p-6 sm:rounded-[2rem] sm:p-10"
         >
           <p className="mb-3 text-[0.68rem] font-semibold uppercase tracking-[0.3em] text-muted-foreground">
             About Me
@@ -38,10 +41,11 @@ export default function TraitShowcase() {
           </h2>
           <p className="mt-4 text-base leading-7 text-muted-foreground sm:text-lg">
             Transitioning into tech from a non-technical background taught me
-            how to break down complex systems into clear, simple principles. By
-            taking the time to build a deep, foundational understanding of
-            technical concepts, I&apos;m able to translate complex ideas and
-            communicate the purpose behind them to non-technical audiences.
+            how to break down complex concepts into clear, simple principles and
+            ideas. By taking the time to build a deep, foundational
+            understanding of complex concepts from the ground up, I&apos;m able
+            to translate them and communicate the purpose behind them to
+            non-technical audiences.
           </p>
         </motion.div>
       </PageContainer>
