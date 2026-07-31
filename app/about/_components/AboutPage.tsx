@@ -13,7 +13,7 @@ const SPOKEN_LANGUAGES = [
   { name: "Japanese", nativeName: "日本語" },
 ];
 
-const PLACES = ["Toronto", "Singapore", "Taipei", "Hong Kong", "Japan"];
+const PLACES = ["Toronto", "Singapore", "Taiwan", "Hong Kong", "Japan"];
 
 const DETAILS = [
   {
@@ -39,6 +39,13 @@ const DETAILS = [
     label: "Work",
     eyebrow: "Experience",
     content: "AI consulting at a Big 4 Firm",
+    icon: Briefcase,
+  },
+  ,
+  {
+    label: "Tech",
+    eyebrow: "Side Project",
+    content: "Started XingJi Travels",
     icon: Briefcase,
   },
 ];
@@ -369,6 +376,7 @@ export function AboutPage() {
                 animate="visible"
               >
                 {DETAILS.map((detail, index) => {
+                  if (!detail) return null;
                   const Icon = detail.icon;
 
                   return (

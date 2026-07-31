@@ -1,9 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
-import type { PaginatedPosts } from "@/lib/blog";
+import type { BlogPostSummary } from "@/lib/blog";
+
+const PAGE_SIZE = 8;
 
 const getContainerVariants = (reducedMotion: boolean) => ({
   hidden: { opacity: 0 },
@@ -33,13 +36,23 @@ function getPageHref(page: number) {
 
 export default function BlogPostsClient({
   posts,
-  page,
-  totalPosts,
-  totalPages,
-}: PaginatedPosts) {
+}: {
+  posts: BlogPostSummary[];
+}) {
+  const searchParams = useSearchParams();
   const shouldReduceMotion = useReducedMotion() ?? false;
   const containerVariants = getContainerVariants(shouldReduceMotion);
   const cardVariants = getCardVariants(shouldReduceMotion);
+  const requestedPage = Number.parseInt(searchParams.get("page") ?? "1", 10);
+  const totalPosts = posts.length;
+  const totalPages = Math.ceil(totalPosts / PAGE_SIZE);
+  const page =
+    Number.isSafeInteger(requestedPage) &&
+    requestedPage > 0 &&
+    (totalPages === 0 || requestedPage <= totalPages)
+      ? requestedPage
+      : 1;
+  const visiblePosts = posts.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   return (
     <>
@@ -49,7 +62,7 @@ export default function BlogPostsClient({
         initial="hidden"
         animate="visible"
       >
-        {posts.map((post) => (
+        {visiblePosts.map((post) => (
           <motion.div key={post.slug} variants={cardVariants}>
             <Link
               href={`/blog/${post.slug}`}

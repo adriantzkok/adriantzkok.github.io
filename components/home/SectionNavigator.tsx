@@ -5,9 +5,9 @@ import { motion, useReducedMotion } from "motion/react";
 
 const sections = [
   { id: "hero", label: "Introduction", number: "01" },
-  { id: "about", label: "About", number: "02" },
-  { id: "projects", label: "Projects", number: "03" },
-  { id: "writing", label: "Writing", number: "04" },
+  { id: "writing", label: "Writing", number: "02" },
+  { id: "about", label: "About", number: "03" },
+  { id: "projects", label: "Projects", number: "04" },
 ];
 
 export function SectionNavigator() {

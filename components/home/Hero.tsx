@@ -1,11 +1,35 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import SectionWrapper from "./SectionWrapper";
 import { PageContainer } from "@/components/shared/PageContainer";
-import { motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+
+const scenes = [
+  {
+    src: "/hero-xingji-1.webp",
+    label: "People walking through a lively Osaka shopping street",
+    position: "50% 50%",
+  },
+  {
+    src: "/hero-xingji-2.webp",
+    label: "A small boat sailing on a calm river near trees",
+    position: "50% 50%",
+  },
+  {
+    src: "/hero-xingji-3.webp",
+    label: "Sunset clouds above a river and city skyline",
+    position: "50% 50%",
+  },
+  {
+    src: "/hero-xingji-4.webp",
+    label: "Sunlight crossing utility wires on a Japanese street",
+    position: "50% 50%",
+  },
+];
 
 const getContainerVariants = (reducedMotion: boolean) => ({
   hidden: { opacity: 0 },
@@ -42,9 +66,18 @@ const getButtonVariants = (reducedMotion: boolean) => ({
 
 export function Hero() {
   const shouldReduceMotion = useReducedMotion() ?? false;
+  const [activeScene, setActiveScene] = useState(1);
   const containerVariants = getContainerVariants(shouldReduceMotion);
   const textVariants = getTextVariants(shouldReduceMotion);
   const buttonVariants = getButtonVariants(shouldReduceMotion);
+
+  useEffect(() => {
+    const timeout = window.setTimeout(() => {
+      setActiveScene((currentScene) => (currentScene + 1) % scenes.length);
+    }, 5000);
+
+    return () => window.clearTimeout(timeout);
+  }, [activeScene]);
 
   return (
     <SectionWrapper id="hero" className="relative pt-8 sm:pt-12 lg:pt-16">
@@ -164,37 +197,76 @@ export function Hero() {
             </motion.div>
           </div>
 
-          <motion.div
-            variants={textVariants}
-            className="overflow-hidden rounded-2xl border border-border/60 bg-background/90 p-3 shadow-sm sm:rounded-[2rem] sm:p-6"
-            whileHover={
-              shouldReduceMotion
-                ? undefined
-                : {
-                    y: -4,
-                    scale: 1.01,
-                    transition: { type: "spring", stiffness: 220, damping: 20 },
-                  }
-            }
-          >
-            <div className="grid grid-cols-2 gap-2 sm:gap-4">
-              {[1, 2, 3, 4].map((photo) => (
+          <motion.div variants={textVariants} className="relative lg:pl-10">
+            <div className="pointer-events-none absolute inset-y-10 left-0 hidden w-px bg-border lg:block" />
+            <div className="relative min-h-[31rem] overflow-hidden border border-foreground/15 bg-zinc-900 sm:min-h-[38rem]">
+              <AnimatePresence mode="wait" initial={false}>
                 <motion.div
-                  key={photo}
-                  whileHover={
-                    shouldReduceMotion ? undefined : { y: -2, scale: 1.01 }
+                  key={activeScene}
+                  className="absolute inset-0"
+                  initial={
+                    shouldReduceMotion
+                      ? { opacity: 1 }
+                      : { opacity: 0, scale: 1.025 }
                   }
-                  className="overflow-hidden rounded-xl border border-border/60 bg-zinc-950 sm:rounded-[1.75rem]"
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={
+                    shouldReduceMotion
+                      ? { opacity: 0 }
+                      : { opacity: 0, scale: 0.99 }
+                  }
+                  transition={{
+                    duration: shouldReduceMotion ? 0 : 0.55,
+                    ease: "easeOut",
+                  }}
                 >
                   <Image
-                    src={`/${photo}.webp`}
-                    alt={`Gallery photo ${photo}`}
-                    width={600}
-                    height={700}
-                    className="aspect-[4/5] h-auto w-full object-cover sm:h-80 sm:aspect-auto"
+                    src={scenes[activeScene].src}
+                    alt={scenes[activeScene].label}
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 42vw, 100vw"
+                    className="object-cover"
+                    style={{ objectPosition: scenes[activeScene].position }}
                   />
                 </motion.div>
-              ))}
+              </AnimatePresence>
+
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-black/10" />
+              <div className="pointer-events-none absolute inset-5 border border-white/25 sm:inset-7" />
+
+              <div className="absolute bottom-6 left-6 text-white sm:bottom-9 sm:left-9">
+                <p className="text-[0.65rem] uppercase tracking-[0.24em] text-white/65">
+                  Observation {String(activeScene + 1).padStart(2, "0")}
+                </p>
+              </div>
+
+              <div className="absolute bottom-6 right-6 flex flex-col items-end gap-2 sm:bottom-9 sm:right-9">
+                {scenes.map((scene, index) => (
+                  <button
+                    key={scene.src}
+                    type="button"
+                    onClick={() => setActiveScene(index)}
+                    aria-pressed={activeScene === index}
+                    className="group flex h-7 items-center gap-2 text-xs text-white/60 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                  >
+                    <span
+                      className={`h-px transition-all duration-300 ${
+                        activeScene === index
+                          ? "w-8 bg-white"
+                          : "w-3 bg-white/45 group-hover:w-5"
+                      }`}
+                    />
+                    <span className={activeScene === index ? "text-white" : ""}>
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-3 text-right text-[0.65rem] uppercase tracking-[0.2em] text-muted-foreground">
+              <span>34.6937° N / 135.5023° E</span>
             </div>
           </motion.div>
         </motion.div>

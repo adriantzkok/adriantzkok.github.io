@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "export",
   trailingSlash: true,
   eslint: {
     ignoreDuringBuilds: false,
@@ -9,8 +10,6 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
-  },
-  images: {
     remotePatterns: [
       {
         protocol: "https",

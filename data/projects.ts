@@ -40,7 +40,7 @@ export const PROJECTS: Project[] = [
     ],
     image: "/xingjitravel.gif",
     demoUrl: "https://xingjitravel.com/",
-    blogUrl: "https://adrian-blog.vercel.app/en-US/posts/70",
+    blogUrl: "https://adriantzkok.github.io/blog/xingji-creation/",
   },
   {
     id: "2",
@@ -84,6 +84,6 @@ export const PROJECTS: Project[] = [
     image: "/blogpreview.gif",
     demoUrl: "https://adrian-blog.vercel.app/",
     githubUrl: "https://github.com/adriantzkok/MarkBlog",
-    blogUrl: "https://adrian-blog.vercel.app/en-US/posts/57",
+    blogUrl: "https://adriantzkok.github.io/blog/markblog-dev/",
   },
 ];

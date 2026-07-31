@@ -39,9 +39,8 @@ export function Footer() {
             ))}
           </div>
         </div>
-
         <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-border/70 pt-8 text-sm text-muted-foreground md:flex-row">
-          <p>© 2025 Adrian K. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Adrian K. All rights reserved.</p>
         </div>
       </PageContainer>
     </footer>

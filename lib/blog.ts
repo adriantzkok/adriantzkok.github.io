@@ -120,6 +120,23 @@ export async function getRecentPosts(limit = 6): Promise<BlogPostSummary[]> {
   return rows.map(toPostSummary);
 }
 
+export async function getPublishedPosts(): Promise<BlogPostSummary[]> {
+  const sql = getSql();
+
+  if (!sql) {
+    return [];
+  }
+
+  const rows = await sql`
+    SELECT slug, title, excerpt, published, published_at, tags
+    FROM blog_posts
+    WHERE published = true
+    ORDER BY published_at DESC, created_at DESC
+  `;
+
+  return rows.map(toPostSummary);
+}
+
 export async function getMorePosts(
   currentSlug: string,
   limit = 6,

@@ -1,22 +1,10 @@
-import { notFound } from "next/navigation";
-import { getPostsPage } from "@/lib/blog";
+import { getPublishedPosts } from "@/lib/blog";
 import BlogPostsClient from "./BlogPostsClient";
 
-type BlogPostsProps = {
-  searchParams: Promise<{ page?: string | string[] }>;
-};
+export async function BlogPosts() {
+  const posts = await getPublishedPosts();
 
-export async function BlogPosts({ searchParams }: BlogPostsProps) {
-  const { page: pageParam } = await searchParams;
-  const requestedPage =
-    typeof pageParam === "string" ? Number.parseInt(pageParam, 10) : 1;
-  const result = await getPostsPage(requestedPage);
-
-  if (result.totalPages > 0 && result.page > result.totalPages) {
-    notFound();
-  }
-
-  return <BlogPostsClient {...result} />;
+  return <BlogPostsClient posts={posts} />;
 }
 
 export function BlogPostsSkeleton() {
