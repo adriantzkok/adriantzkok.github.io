@@ -103,7 +103,7 @@
     "typescript": "^5",
     "typescript-eslint": "latest"
   },
-  "description": "This is a personal portfolio website i've created to showcase my work across various projects.",
+  "description": "This is a personal portfolio website I've created to showcase my work across various projects.",
   "main": "eslint.config.js",
   "directories": {
     "lib": "lib"

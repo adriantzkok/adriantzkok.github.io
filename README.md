@@ -1,6 +1,6 @@
 # Personal Portfolio
 
-This is a personal portfolio website i've created to showcase my work across various projects.
+This is a personal portfolio website I've created to showcase my work across various projects.
 
 ## Routes
 
